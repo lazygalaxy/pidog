@@ -3,9 +3,6 @@ import time
 from pidog import Pidog
 from preset_actions import bark
 
-t = time.time()
-pee_side = 1
-
 my_dog = Pidog()
 
 stand = my_dog.legs_angle_calculation([[0, 80], [0, 80], [30, 75], [30, 75]])
@@ -17,14 +14,15 @@ my_dog.wait_all_done()
 
 
 def pee():
+    pee_side = False
     while True:
         my_dog.legs_move([stand], speed=70)
         my_dog.wait_all_done()
-        time.sleep(0.5)
+        time.sleep(1.5)
         if pee_side := not pee_side:
             my_dog.legs_move([left_pipi], speed=50)
         else:
-            my_dog.legs_move([left_pipi], speed=50)
+            my_dog.legs_move([right_pipi], speed=50)
         my_dog.wait_all_done()
         my_dog.speak("pee", 100)
         my_dog.do_action("wag_tail", step_count=5, speed=99)
