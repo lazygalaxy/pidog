@@ -21,33 +21,34 @@ def pee():
 
         # looking around if anyone is looking!
         time.sleep(1.0)
-        head_turn(40)
+        head_turn(my_dog, 40)
         my_dog.wait_all_done()
         time.sleep(1.0)
-        head_turn(-40)
+        head_turn(my_dog, -40)
         my_dog.wait_all_done()
         time.sleep(1.0)
-        head_turn(0)
+        head_turn(my_dog)
         my_dog.wait_all_done()
 
         # take a pee
         if pee_side := not pee_side:
             my_dog.legs_move([left_pipi], speed=50)
-            head_turn(40,-20)
+            head_turn(my_dog, 40, -20)
         else:
             my_dog.legs_move([right_pipi], speed=50)
-            head_turn(-40,20)
+            head_turn(my_dog, -40, -20)
         my_dog.wait_all_done()
         my_dog.speak("../sounds/peeing.mp3", 100)
         my_dog.do_action("wag_tail", step_count=5, speed=99)
         time.sleep(5.0)
 
 
-def head_turn(my_dog, x_posi=0, y_posi=0):
+def head_turn(my_dog: Pidog, x_posi: int = 0, y_posi: int = 0):
     yrp = [0, 0, y_posi]
     head_posi = [x_posi + yrp[0], 0 + yrp[1], 0 + yrp[2]]
     my_dog.head_move(head_posi, speed=92)
     my_dog.wait_all_done()
+
 
 if __name__ == "__main__":
     try:
