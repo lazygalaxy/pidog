@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import time
 from pidog import Pidog
 from time import sleep
 from preset_actions import howling
@@ -11,16 +12,19 @@ stand = my_dog.legs_angle_calculation([[0, 80], [0, 80], [30, 75], [30, 75]])
 pee = my_dog.legs_angle_calculation([[0, 80], [0, 80], [30, 75], [75, 75]])
 
 
-def main():
+def pee():
     my_dog.legs_move([stand], speed=70)
     my_dog.wait_all_done()
     my_dog.legs_move([pee], speed=50)
     my_dog.wait_all_done()
+    time.sleep(3.0)
 
 
 if __name__ == "__main__":
     try:
-        main()
+        while True:
+            pee()
+            time.sleep(1.0)
     except KeyboardInterrupt:
         pass
     except Exception as e:
