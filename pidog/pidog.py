@@ -96,7 +96,7 @@ class Pidog():
         [BODY_WIDTH / 2, -BODY_LENGTH / 2,  0],
         [-BODY_WIDTH / 2,  BODY_LENGTH / 2,  0],
         [BODY_WIDTH / 2,  BODY_LENGTH / 2,  0]]).T
-    SOUND_DIR = f"{UserHome}/pidog/sounds/"
+    SOUND_DIR = "../sounds/"
     # Servo Speed
     # HEAD_DPS = 300
     # LEGS_DPS = 350
