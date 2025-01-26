@@ -34,10 +34,10 @@ def pee():
         # take a pee
         if pee_side := not pee_side:
             my_dog.legs_move([left_pipi], speed=50)
-            head_turn(my_dog, 40, -20)
+            head_turn(my_dog, -40, -40)
         else:
             my_dog.legs_move([right_pipi], speed=50)
-            head_turn(my_dog, -40, -20)
+            head_turn(my_dog, 40, -40)
         my_dog.wait_all_done()
         my_dog.speak("../sounds/peeing.mp3", 100)
         my_dog.do_action("wag_tail", step_count=5, speed=99)
