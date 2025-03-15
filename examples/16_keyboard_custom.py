@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 import time
-import sys
-import select
 from pidog import Pidog
 from preset_actions import *
+import sys
+import tty
+import termios
 
 # init pidog
 # ======================================
@@ -460,18 +461,23 @@ def run_operation(key):
                 OPERATIONS[after]["function"]() # run after function
 
 
-def check_input():
-    """Returns the pressed key if available, otherwise None."""
-    if select.select([sys.stdin], [], [], 0)[0]:  # Non-blocking check
-        return sys.stdin.read(1)
-    return None
+def get_key():
+    """Reads a single key press and returns its integer (ASCII) value."""
+    fd = sys.stdin.fileno()
+    old_settings = termios.tcgetattr(fd)
+    try:
+        tty.setraw(fd)  # Set terminal to raw mode (no Enter required)
+        key = sys.stdin.read(1)  # Read one character
+        return ord(key)  # Convert character to ASCII integer
+    finally:
+        termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)  # Restore settings
 
 
 def main():
     global last_key
 
     while True:
-        key = check_input()
+        key = get_key()
         if key is not None and key > 32 and key < 127:
             key = chr(key)
             if key in KEYS:
