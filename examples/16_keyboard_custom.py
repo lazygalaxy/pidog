@@ -472,7 +472,7 @@ def main():
 
     while True:
         key = check_input()
-        if key > 32 and key < 127:
+        if key is not None and key > 32 and key < 127:
             key = chr(key)
             if key in KEYS:
                 if last_key != key:
