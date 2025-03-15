@@ -2,9 +2,8 @@
 import time
 from pidog import Pidog
 from preset_actions import *
-import sys
-import tty
-import termios
+from evdev import InputDevice, ecodes
+
 
 # init pidog
 # ======================================
@@ -27,6 +26,7 @@ command = None
 current_status = STATUS_LIE
 
 last_key = None
+device = InputDevice("/dev/input/event1")
 
 # KEYS and OPERATIONS:dict
 # ======================================
@@ -462,15 +462,14 @@ def run_operation(key):
 
 
 def get_key():
-    """Reads a single key press and returns its integer (ASCII) value."""
-    fd = sys.stdin.fileno()
-    old_settings = termios.tcgetattr(fd)
-    try:
-        tty.setraw(fd)  # Set terminal to raw mode (no Enter required)
-        key = sys.stdin.read(1)  # Read one character
-        return ord(key)  # Convert character to ASCII integer
-    finally:
-        termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)  # Restore settings
+    for event in device.read_loop():  # Blocking loop (best for systemd)
+        if event.type == ecodes.EV_KEY and event.value == 1:  # Key press event
+            keycode = event.code
+            if keycode in ecodes.KEY:
+                key_name = ecodes.KEY[keycode].replace("KEY_", "")
+                if len(key_name) == 1:
+                    return ord(key_name.lower())
+    return None
 
 
 def main():
