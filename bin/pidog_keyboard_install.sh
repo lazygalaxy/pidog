@@ -48,7 +48,7 @@ After=multi-user.target
 [Service]
 Environment="TERM=xterm"
 Type=simple
-ExecStart=sudo python3 $user_home/pidog/examples/11_keyboard_control.py &
+ExecStart=sudo python3 $user_home/Develop/git/pidog/examples/16_keyboard_custom.py &
 PrivateTmp=True
 User=$user
 Group=$user

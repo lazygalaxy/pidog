@@ -498,8 +498,6 @@ def main():
 if __name__ == '__main__':
     try:
         main()
-    except KeyboardInterrupt:
-        pass
     except Exception as e:
         print(f"\033[31mERROR: {e}\033[m")
     finally:
