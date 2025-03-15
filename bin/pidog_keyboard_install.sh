@@ -46,8 +46,6 @@ Description=pidog_keyboard service
 After=multi-user.target
 
 [Service]
-StandardInput=tty
-TTYPath=/dev/tty1
 Type=simple
 ExecStart=sudo python3 $user_home/Develop/git/pidog/examples/16_keyboard_custom.py &
 PrivateTmp=True
