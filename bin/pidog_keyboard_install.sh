@@ -46,6 +46,7 @@ Description=pidog_keyboard service
 After=multi-user.target
 
 [Service]
+Environment="TERM=xterm"
 Type=simple
 ExecStart=sudo python3 $user_home/pidog/examples/11_keyboard_control.py &
 PrivateTmp=True
