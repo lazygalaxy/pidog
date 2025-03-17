@@ -1,4 +1,3 @@
-
 from time import sleep
 import random
 from math import sin, cos, pi
@@ -221,6 +220,36 @@ def howling(my_dog, volume=100):
     my_dog.head_move([[0, 0, -40]], speed=80)
     my_dog.wait_all_done()
 
+def peeing(my_dog, pee_left=False, volume=100):
+    # looking around if anyone is looking!
+    head_turn(my_dog, 1.0, 40)
+    head_turn(my_dog, 1.0, -40)
+    head_turn(my_dog, 1.0)
+
+    # determine on which side to pee
+    if pee_left:
+        head_turn(my_dog, 0.0, -40, -40)
+        my_dog.legs_move(
+            [my_dog.legs_angle_calculation([[0, 40], [0, 80], [30, 75], [30, 0]])],
+            speed=50,
+        )
+
+    else:
+        head_turn(my_dog, 0.0, 40, -40)
+        my_dog.legs_move([my_dog.legs_angle_calculation([[0, 80], [0, 40], [30, 0], [30, 75]])], speed=50)
+    my_dog.speak("../sounds/peeing.mp3", volume)
+    my_dog.do_action("wag_tail", step_count=5, speed=99)
+    # pee will last 5 seconds
+    sleep(5.0)
+
+
+def head_turn(my_dog: Pidog, seconds: float = 0.0, x_posi: int = 0, y_posi: int = 0):
+    yrp = [0, 0, y_posi]
+    head_posi = [[x_posi + yrp[0], 0 + yrp[1], 0 + yrp[2]]]
+    my_dog.head_move(head_posi, immediately=False, speed=92)
+    my_dog.wait_all_done()
+    sleep(seconds)
+
 
 def attack_posture(my_dog):
     f2 = my_dog.legs_angle_calculation(
@@ -322,7 +351,7 @@ def feet_shake(my_dog, step=None):
     my_dog.head_move([[0, 0, -40]], speed=80)
     my_dog.wait_all_done()
 
-    
+
 def sit_2_stand(my_dog, speed=75):
 
     sit_angles = my_dog.actions_dict['sit'][0][0]
@@ -651,5 +680,3 @@ if __name__ == "__main__":
     #     alert(my_dog, pitch_comp=-35)
     #     # break
     #     sleep(2)
-
-

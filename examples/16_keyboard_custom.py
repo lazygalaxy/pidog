@@ -32,7 +32,7 @@ device = InputDevice("/dev/input/event1")
 # ======================================
 KEYS = {
     "1": {  # keyname
-        "pos": [0, 0], # ypos, xpos
+        "pos": [0, 0],  # ypos, xpos
         "tip": ["Doze", "Off"],
         "operation": "doze off",
     },
@@ -150,12 +150,12 @@ KEYS = {
     "p": {
         "pos": [5, 95],
         "tip": ["", ""],
-        "operation": None,
+        "operation": "peeing",
     },
     "P": {
         "pos": [5, 95],
         "tip_upper": " ",
-        "operation": None,
+        "operation": "peeing",
     },
     ####################
     "a": {
@@ -258,44 +258,43 @@ KEYS = {
 
 OPERATIONS = {
     "forward": {
-        "function": lambda: my_dog.do_action('forward', speed=98),
+        "function": lambda: my_dog.do_action("forward", speed=98),
         "status": STATUS_STAND,
         "head_pitch": STAND_HEAD_PITCH,
     },
     "backward": {
-        "function": lambda: my_dog.do_action('backward', speed=98),
+        "function": lambda: my_dog.do_action("backward", speed=98),
         "status": STATUS_STAND,
         "head_pitch": STAND_HEAD_PITCH,
     },
     "turn left": {
-        "function": lambda: my_dog.do_action('turn_left', speed=98),
+        "function": lambda: my_dog.do_action("turn_left", speed=98),
         "status": STATUS_STAND,
         "head_pitch": STAND_HEAD_PITCH,
     },
     "turn right": {
-        "function": lambda: my_dog.do_action('turn_right', speed=98),
+        "function": lambda: my_dog.do_action("turn_right", speed=98),
         "status": STATUS_STAND,
         "head_pitch": STAND_HEAD_PITCH,
     },
     "trot": {
-        "function": lambda: my_dog.do_action('trot', speed=98),
+        "function": lambda: my_dog.do_action("trot", speed=98),
         "status": STATUS_STAND,
         "head_pitch": STAND_HEAD_PITCH,
     },
-    "stop": {
-    },
+    "stop": {},
     "lie": {
-        "function": lambda: my_dog.do_action('lie', speed=70),
+        "function": lambda: my_dog.do_action("lie", speed=70),
         "head_pitch": STAND_HEAD_PITCH,
         "status": STATUS_LIE,
     },
     "stand": {
-        "function": lambda: my_dog.do_action('stand', speed=70),
+        "function": lambda: my_dog.do_action("stand", speed=70),
         "head_pitch": STAND_HEAD_PITCH,
         "status": STATUS_STAND,
     },
     "sit": {
-        "function": lambda: my_dog.do_action('sit', speed=70),
+        "function": lambda: my_dog.do_action("sit", speed=70),
         "head_pitch": SIT_HEAD_PITCH,
         "status": STATUS_SIT,
     },
@@ -303,25 +302,27 @@ OPERATIONS = {
         "function": lambda: bark(my_dog, head_yrp, pitch_comp=head_pitch_init),
     },
     "bark harder": {
-        "function": lambda: bark_action(my_dog, head_yrp, 'single_bark_1'),
+        "function": lambda: bark_action(my_dog, head_yrp, "single_bark_1"),
     },
     "pant": {
         "function": lambda: pant(my_dog, head_yrp, pitch_comp=head_pitch_init),
     },
     "wag tail": {
-        "function": lambda: my_dog.do_action('wag_tail', speed=100),
+        "function": lambda: my_dog.do_action("wag_tail", speed=100),
         "after": "wag tail",
     },
     "shake head": {
-        "function": lambda: shake_head(my_dog,[ head_yrp[0], head_yrp[1], head_yrp[2]+head_pitch_init]),
+        "function": lambda: shake_head(
+            my_dog, [head_yrp[0], head_yrp[1], head_yrp[2] + head_pitch_init]
+        ),
     },
     "stretch": {
-        "function": lambda: my_dog.do_action('stretch', speed=80),
+        "function": lambda: my_dog.do_action("stretch", speed=80),
         # "after": "stand",
         "status": STATUS_STAND,
     },
     "doze off": {
-        "function": lambda: my_dog.do_action('doze_off', speed=95),
+        "function": lambda: my_dog.do_action("doze_off", speed=95),
         "after": "doze off",
         "status": STATUS_LIE,
     },
@@ -333,6 +334,11 @@ OPERATIONS = {
         "function": lambda: howling(my_dog),
         "after": "sit",
         "status": STATUS_SIT,
+    },
+    "peeing": {
+        "function": lambda: peeing(my_dog),
+        "after": "stand",
+        "status": STATUS_STAND,
     },
     "twist body": {
         "function": lambda: body_twisting(my_dog),
