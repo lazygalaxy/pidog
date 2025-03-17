@@ -229,11 +229,7 @@ def peeing(my_dog, pee_left=False, volume=100):
     # determine on which side to pee
     if pee_left:
         head_turn(my_dog, 0.0, -40, -40)
-        my_dog.legs_move(
-            [my_dog.legs_angle_calculation([[0, 40], [0, 80], [30, 75], [30, 0]])],
-            speed=50,
-        )
-
+        my_dog.legs_move([my_dog.legs_angle_calculation([[0, 40], [0, 80], [30, 75], [30, 0]])],speed=50)
     else:
         head_turn(my_dog, 0.0, 40, -40)
         my_dog.legs_move([my_dog.legs_angle_calculation([[0, 80], [0, 40], [30, 0], [30, 75]])], speed=50)
