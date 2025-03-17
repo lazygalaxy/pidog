@@ -243,7 +243,7 @@ def peeing(my_dog, pee_left=False, volume=100):
     sleep(5.0)
 
 
-def head_turn(my_dog: Pidog, seconds: float = 0.0, x_posi: int = 0, y_posi: int = 0):
+def head_turn(my_dog, seconds: float = 0.0, x_posi: int = 0, y_posi: int = 0):
     yrp = [0, 0, y_posi]
     head_posi = [[x_posi + yrp[0], 0 + yrp[1], 0 + yrp[2]]]
     my_dog.head_move(head_posi, immediately=False, speed=92)
